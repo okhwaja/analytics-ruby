@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 module Mongoose
   class Analytics
@@ -9,6 +10,8 @@ module Mongoose
         allow(subject.logger).to receive(:debug)
       end
 
+      subject { described_class.new :host => HOST }
+
       describe '#initialize' do
         let!(:net_http) { Net::HTTP.new(anything, anything) }
 
@@ -18,17 +21,17 @@ module Mongoose
 
         it 'sets an initalized Net::HTTP read_timeout' do
           expect(net_http).to receive(:use_ssl=)
-          described_class.new
+          described_class.new :host => HOST
         end
 
         it 'sets an initalized Net::HTTP read_timeout' do
           expect(net_http).to receive(:read_timeout=)
-          described_class.new
+          described_class.new :host => HOST
         end
 
         it 'sets an initalized Net::HTTP open_timeout' do
           expect(net_http).to receive(:open_timeout=)
-          described_class.new
+          described_class.new :host => HOST
         end
 
         it 'sets the http client' do
@@ -53,10 +56,10 @@ module Mongoose
 
           it 'initializes a new Net::HTTP with default host and port' do
             expect(Net::HTTP).to receive(:new).with(
-              described_class::HOST,
+              HOST,
               described_class::PORT
             )
-            described_class.new
+            described_class.new :host => HOST
           end
         end
 
@@ -162,7 +165,7 @@ module Mongoose
             let(:retries) { 4 }
             let(:backoff_policy) { FakeBackoffPolicy.new([1000, 1000, 1000]) }
             subject {
-              described_class.new(retries: retries,
+              described_class.new(retries: retries, host: HOST,
                                   backoff_policy: backoff_policy)
             }
 
@@ -181,7 +184,7 @@ module Mongoose
             let(:body) { body }
             let(:retries) { 4 }
             let(:backoff) { 1 }
-            subject { described_class.new(retries: retries, backoff: backoff) }
+            subject { described_class.new(retries: retries, backoff: backoff, host: HOST) }
 
             it 'does not retry the request' do
               expect(subject)
@@ -225,7 +228,7 @@ module Mongoose
           context 'request or parsing of response results in an exception' do
             let(:response_body) { 'Malformed JSON ---' }
 
-            subject { described_class.new(retries: 0) }
+            subject { described_class.new(retries: 0, host: HOST) }
 
             it 'returns a -1 for status' do
               expect(subject.send(write_key, batch).status).to eq(-1)

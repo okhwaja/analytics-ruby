@@ -6,6 +6,7 @@ require 'mongoose/analytics/backoff_policy'
 require 'net/http'
 require 'net/https'
 require 'json'
+require 'pry'
 
 module Mongoose
   class Analytics
