@@ -4,7 +4,7 @@ module Mongoose
   class Analytics
     describe Client do
       let(:client) do
-        Client.new(:write_key => WRITE_KEY).tap { |client|
+        Client.new(:write_key => WRITE_KEY, host: HOST).tap { |client|
           # Ensure that worker doesn't consume items from the queue
           client.instance_variable_set(:@worker, NoopWorker.new)
         }
@@ -16,15 +16,19 @@ module Mongoose
           expect { Client.new }.to raise_error(ArgumentError)
         end
 
-        it 'does not error if a write_key is supplied' do
+        it 'errors if no host is supplied' do
+          expect { Client.new :write_key => WRITE_KEY }.to raise_error(ArgumentError)
+        end
+
+        it 'does not error if a write_key and host are supplied' do
           expect do
-            Client.new :write_key => WRITE_KEY
+            Client.new :write_key => WRITE_KEY, :host => HOST
           end.to_not raise_error
         end
 
-        it 'does not error if a write_key is supplied as a string' do
+        it 'does not error if a write_key and host are supplied as strings' do
           expect do
-            Client.new 'write_key' => WRITE_KEY
+            Client.new 'write_key' => WRITE_KEY, 'host' => HOST
           end.to_not raise_error
         end
       end
@@ -251,7 +255,7 @@ module Mongoose
 
       describe '#flush' do
         let(:client_with_worker) {
-          Client.new(:write_key => WRITE_KEY).tap { |client|
+          Client.new(:write_key => WRITE_KEY, :host => HOST).tap { |client|
             queue = client.instance_variable_get(:@queue)
             client.instance_variable_set(:@worker, DummyWorker.new(queue))
           }

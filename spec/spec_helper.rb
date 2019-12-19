@@ -13,6 +13,7 @@ Time.zone = 'UTC'
 module Mongoose
   class Analytics
     WRITE_KEY = 'testsecret'
+    HOST = 'dummy.com'
 
     TRACK = {
       :event => 'Ruby Library test event',
