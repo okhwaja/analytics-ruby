@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Segment
+module Mongoose
   class Analytics
     describe BackoffPolicy do
       describe '#initialize' do

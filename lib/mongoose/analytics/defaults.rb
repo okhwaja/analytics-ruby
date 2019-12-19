@@ -1,14 +1,14 @@
-module Segment
+module Mongoose
   class Analytics
     module Defaults
       module Request
-        HOST = 'api.segment.io'
+        HOST = 'api.mongoose.io'
         PORT = 443
         PATH = '/v1/import'
         SSL = true
         HEADERS = { 'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
-                    'User-Agent' => "analytics-ruby/#{Analytics::VERSION}" }
+                    'User-Agent' => "mongoose-ruby/#{Analytics::VERSION}" }
         RETRIES = 10
       end
 

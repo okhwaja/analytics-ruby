@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Segment
+module Mongoose
   class Analytics
     describe Transport do
       before do
@@ -48,7 +48,7 @@ module Segment
 
           it 'sets a default backoff policy' do
             backoff_policy = subject.instance_variable_get(:@backoff_policy)
-            expect(backoff_policy).to be_a(Segment::Analytics::BackoffPolicy)
+            expect(backoff_policy).to be_a(Mongoose::Analytics::BackoffPolicy)
           end
 
           it 'initializes a new Net::HTTP with default host and port' do
@@ -120,7 +120,7 @@ module Segment
           default_headers = {
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-            'User-Agent' => "analytics-ruby/#{Analytics::VERSION}"
+            'User-Agent' => "mongoose-ruby/#{Analytics::VERSION}"
           }
           expect(Net::HTTP::Post).to receive(:new).with(
             path, default_headers

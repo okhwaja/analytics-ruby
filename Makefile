@@ -15,8 +15,8 @@ check: install  # Installation required for testing binary
 
 # Compile the code and produce any binaries where applicable.
 build:
-	rm -f analytics-ruby-*.gem
-	gem build ./analytics-ruby.gemspec
+	rm -f mongoose-ruby-*.gem
+	gem build ./mongoose-ruby.gemspec
 
 install: build
-	gem install analytics-ruby-*.gem
+	gem install mongoose-ruby-*.gem

@@ -1,6 +1,6 @@
 require 'logger'
 
-module Segment
+module Mongoose
   class Analytics
     # Wraps an existing logger and adds a prefix to all messages
     class PrefixedLogger
@@ -35,10 +35,10 @@ module Segment
                           Rails.logger
                         else
                           logger = Logger.new STDOUT
-                          logger.progname = 'Segment::Analytics'
+                          logger.progname = 'Mongoose::Analytics'
                           logger
                         end
-          @logger = PrefixedLogger.new(base_logger, '[analytics-ruby]')
+          @logger = PrefixedLogger.new(base_logger, '[mongoose-ruby]')
         end
 
         attr_writer :logger

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Segment
+module Mongoose
   class Analytics
     describe Client do
       let(:client) do

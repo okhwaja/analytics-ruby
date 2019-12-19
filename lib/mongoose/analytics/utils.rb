@@ -1,6 +1,6 @@
 require 'securerandom'
 
-module Segment
+module Mongoose
   class Analytics
     module Utils
       extend self

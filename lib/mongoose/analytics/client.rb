@@ -1,16 +1,16 @@
 require 'thread'
 require 'time'
 
-require 'segment/analytics/defaults'
-require 'segment/analytics/logging'
-require 'segment/analytics/utils'
-require 'segment/analytics/worker'
+require 'mongoose/analytics/defaults'
+require 'mongoose/analytics/logging'
+require 'mongoose/analytics/utils'
+require 'mongoose/analytics/worker'
 
-module Segment
+module Mongoose
   class Analytics
     class Client
-      include Segment::Analytics::Utils
-      include Segment::Analytics::Logging
+      include Mongoose::Analytics::Utils
+      include Mongoose::Analytics::Logging
 
       # @param [Hash] opts
       # @option opts [String] :write_key Your project's write_key
@@ -59,7 +59,7 @@ module Segment
 
       # Tracks an event
       #
-      # @see https://segment.com/docs/sources/server/ruby/#track
+      # @see https://mongoose.com/docs/sources/server/ruby/#track
       #
       # @param [Hash] attrs
       #
@@ -73,7 +73,7 @@ module Segment
 
       # Identifies a user
       #
-      # @see https://segment.com/docs/sources/server/ruby/#identify
+      # @see https://mongoose.com/docs/sources/server/ruby/#identify
       #
       # @param [Hash] attrs
       #
@@ -86,7 +86,7 @@ module Segment
 
       # Aliases a user from one id to another
       #
-      # @see https://segment.com/docs/sources/server/ruby/#alias
+      # @see https://mongoose.com/docs/sources/server/ruby/#alias
       #
       # @param [Hash] attrs
       #
@@ -99,7 +99,7 @@ module Segment
 
       # Associates a user identity with a group.
       #
-      # @see https://segment.com/docs/sources/server/ruby/#group
+      # @see https://mongoose.com/docs/sources/server/ruby/#group
       #
       # @param [Hash] attrs
       #
@@ -113,7 +113,7 @@ module Segment
 
       # Records a page view
       #
-      # @see https://segment.com/docs/sources/server/ruby/#page
+      # @see https://mongoose.com/docs/sources/server/ruby/#page
       #
       # @param [Hash] attrs
       #

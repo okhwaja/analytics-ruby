@@ -1,9 +1,9 @@
-require 'segment/analytics/defaults'
+require 'mongoose/analytics/defaults'
 
-module Segment
+module Mongoose
   class Analytics
     class BackoffPolicy
-      include Segment::Analytics::Defaults::BackoffPolicy
+      include Mongoose::Analytics::Defaults::BackoffPolicy
 
       # @param [Hash] opts
       # @option opts [Numeric] :min_timeout_ms The minimum backoff timeout

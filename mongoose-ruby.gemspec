@@ -1,17 +1,17 @@
-require File.expand_path('../lib/segment/analytics/version', __FILE__)
+require File.expand_path('../lib/mongoose/analytics/version', __FILE__)
 
 Gem::Specification.new do |spec|
-  spec.name = 'analytics-ruby'
-  spec.version = Segment::Analytics::VERSION
+  spec.name = 'mongoose-ruby'
+  spec.version = Mongoose::Analytics::VERSION
   spec.files = Dir.glob("{lib,bin}/**/*")
   spec.require_paths = ['lib']
   spec.bindir = 'bin'
   spec.executables = ['analytics']
-  spec.summary = 'Segment.io analytics library'
-  spec.description = 'The Segment.io ruby analytics library'
-  spec.authors = ['Segment.io']
-  spec.email = 'friends@segment.io'
-  spec.homepage = 'https://github.com/segmentio/analytics-ruby'
+  spec.summary = 'Mongoose.io analytics library'
+  spec.description = 'The Mongoose.io ruby analytics library'
+  spec.authors = ['Mongoose.io']
+  spec.email = 'friends@mongoose.io'
+  spec.homepage = 'https://github.com/mongooseio/mongoose-ruby'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.0'
 
