@@ -3,7 +3,7 @@ require 'spec_helper'
 module Mongoose
   class Analytics
     describe Analytics do
-      let(:analytics) { Mongoose::Analytics.new :write_key => WRITE_KEY, :stub => true }
+      let(:analytics) { Mongoose::Analytics.new :write_key => WRITE_KEY, :stub => true, :host => HOST }
 
       describe '#track' do
         it 'errors without an event' do

@@ -12,7 +12,8 @@ module Mongoose
           queue = Queue.new
           worker = Mongoose::Analytics::Worker.new(queue,
                                                   'secret',
-                                                  'batch_size' => 100)
+                                                  'batch_size' => 100,
+                                                  'host' => HOST)
           batch = worker.instance_variable_get(:@batch)
           expect(batch.instance_variable_get(:@max_message_count)).to eq(100)
         end
@@ -36,7 +37,7 @@ module Mongoose
 
             queue = Queue.new
             queue << {}
-            worker = Mongoose::Analytics::Worker.new(queue, 'secret')
+            worker = Mongoose::Analytics::Worker.new(queue, 'secret', 'host' => HOST)
             worker.run
 
             expect(queue).to be_empty
@@ -59,7 +60,7 @@ module Mongoose
 
           queue = Queue.new
           queue << {}
-          worker = described_class.new(queue, 'secret', :on_error => on_error)
+          worker = described_class.new(queue, 'secret', :on_error => on_error, 'host' => HOST)
 
           # This is to ensure that Client#flush doesn't finish before calling
           # the error handler.
@@ -85,7 +86,7 @@ module Mongoose
           queue << Requested::TRACK
           worker = described_class.new(queue,
                                        'testsecret',
-                                       :on_error => on_error)
+                                       :on_error => on_error, 'host' => HOST)
           worker.run
 
           expect(queue).to be_empty
@@ -109,7 +110,7 @@ module Mongoose
 
           worker = described_class.new(queue,
                                        'testsecret',
-                                       :on_error => on_error)
+                                       :on_error => on_error, 'host' => HOST)
           worker.run
           expect(queue).to be_empty
         end
@@ -118,7 +119,7 @@ module Mongoose
       describe '#is_requesting?' do
         it 'does not return true if there isn\'t a current batch' do
           queue = Queue.new
-          worker = Mongoose::Analytics::Worker.new(queue, 'testsecret')
+          worker = Mongoose::Analytics::Worker.new(queue, 'testsecret', 'host' => HOST)
 
           expect(worker.is_requesting?).to eq(false)
         end
@@ -133,7 +134,7 @@ module Mongoose
 
           queue = Queue.new
           queue << Requested::TRACK
-          worker = Mongoose::Analytics::Worker.new(queue, 'testsecret')
+          worker = Mongoose::Analytics::Worker.new(queue, 'testsecret', 'host' => HOST)
 
           worker_thread = Thread.new { worker.run }
           eventually { expect(worker.is_requesting?).to eq(true) }
