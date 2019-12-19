@@ -15,7 +15,6 @@ module Mongoose
       include Mongoose::Analytics::Logging
 
       def initialize(options = {})
-        options[:host] ||= HOST
         options[:port] ||= PORT
         options[:ssl] ||= SSL
         @headers = options[:headers] || HEADERS
@@ -23,6 +22,8 @@ module Mongoose
         @retries = options[:retries] || RETRIES
         @backoff_policy =
           options[:backoff_policy] || Mongoose::Analytics::BackoffPolicy.new
+
+        check_host!(options[:host])
 
         http = Net::HTTP.new(options[:host], options[:port])
         http.use_ssl = options[:ssl]
@@ -63,6 +64,10 @@ module Mongoose
       end
 
       private
+
+      def check_host!(host)
+        raise ArgumentError, 'Host must be provided' if host.nil?
+      end
 
       def should_retry_request?(status_code, body)
         if status_code >= 500

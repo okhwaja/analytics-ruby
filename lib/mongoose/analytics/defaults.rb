@@ -2,7 +2,6 @@ module Mongoose
   class Analytics
     module Defaults
       module Request
-        HOST = 'api.segment.io'
         PORT = 443
         PATH = '/v2/batch'
         SSL = true
