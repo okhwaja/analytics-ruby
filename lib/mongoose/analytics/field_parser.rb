@@ -137,6 +137,7 @@ module Mongoose
           timestamp = fields[:timestamp] || Time.new
           message_id = fields[:message_id].to_s if fields[:message_id]
           context = fields[:context] || {}
+          routing_keys = fields[:routing_keys] || []
 
           check_user_id! fields
           check_timestamp! timestamp
@@ -146,7 +147,8 @@ module Mongoose
           parsed = {
             :context => context,
             :messageId => message_id,
-            :timestamp => datetime_in_iso8601(timestamp)
+            :timestamp => datetime_in_iso8601(timestamp),
+            :routing_keys => routing_keys,
           }
 
           parsed[:userId] = fields[:user_id] if fields[:user_id]
