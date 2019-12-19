@@ -24,6 +24,7 @@ command :send do |c|
   c.description = 'send a mongoose message'
 
   c.option '--writeKey=<writeKey>', String, 'the Mongoose writeKey'
+  c.option '--host=host', String, 'Hostname of the API like mgs.instacart.com'
   c.option '--type=<type>', String, 'The Mongoose message type'
 
   c.option '--userId=<userId>', String, 'the user id to send the event as'
@@ -44,6 +45,7 @@ command :send do |c|
   c.action do |args, options|
     Analytics = Mongoose::Analytics.new({
       write_key: options.writeKey,
+      host: options.host,
       on_error: Proc.new { |status, msg| print msg }
     })
 
