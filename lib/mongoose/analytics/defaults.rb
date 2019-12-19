@@ -4,7 +4,7 @@ module Mongoose
       module Request
         HOST = 'api.segment.io'
         PORT = 443
-        PATH = '/v1/import'
+        PATH = '/v2/batch'
         SSL = true
         HEADERS = { 'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
